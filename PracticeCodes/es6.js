@@ -275,8 +275,96 @@ function quickCheck(arr, elem) {
 }
 console.log(quickCheck(['squash', 'onions', 'shallots'], 'mushrooms'));
 
+function filteredArray(arr, elem) {
+  let newArr = [];
+  for ( let i = 0 ; i < arr.length ; i++){
+    let subArr = arr[i];
+    if( subArr.indexOf(elem) === -1 ){ // abstracting the arrays which has the elem value
+      newArr.push(subArr);
+    }
+  }
+  return newArr;
+}
+console.log(filteredArray([[3, 2, 3], [1, 6, 3], [3, 13, 26], [19, 3, 9]], 3));
 
-//! Algorithm Scripts
+
+let foods = {
+  apples: 25,
+  oranges: 32,
+  plums: 28,
+  bananas: 13,
+  grapes: 35,
+  strawberries: 27
+};
+function checkInventory(scannedItem) {
+  return foods[scannedItem]; // this is the way to use 
+}
+console.log(checkInventory("apples"));
+
+
+
+const users = {
+  Alan: {
+    online: false
+  },
+  Jeff: {
+    online: true
+  },
+  Sarah: {
+    online: false
+  }
+}
+function countOnline(allUsers) {
+  let count = 0;
+  for ( let user in allUsers ){
+    if ( allUsers[user].online === true ){
+      count++;
+    }
+  }
+    return count;
+}
+console.log(countOnline(users));
+
+
+function getArrayOfUsers(obj) {
+  return Object.keys(obj); // getting the key
+}
+console.log(getArrayOfUsers(users));
+
+
+let user = {
+  name: 'Kenneth',
+  age: 28,
+  data: {
+    username: 'kennethCodesAllDay',
+    joinDate: 'March 26, 2016',
+    organization: 'freeCodeCamp',
+    friends: [
+      'Sam',
+      'Kira',
+      'Tomo'
+    ],
+    location: {
+      city: 'San Francisco',
+      state: 'CA',
+      country: 'USA'
+    }
+  }
+};
+function addFriend(userObj, friend) {
+  if ( userObj.data.friends === friend ){
+    return `Already has ${friend} as friend`
+  }
+  else{
+  userObj.data.friends.push(friend); 
+  }
+return userObj.data.friends;
+}
+console.log(addFriend(user, 'Pete'));
+
+
+
+
 //! Object Oriented Programming
 //! Functional Programming
 //! Intermediate Algorithm Scriptings
