@@ -214,3 +214,69 @@ let result_2 = str.replace(fixRegex, replaceText);
 let hello = "   Hello, World!  ";
 let wsRegex = /^\s+|\s+$/g;
 let result_3 = hello.replace(wsRegex,""); // to replace the whole string
+
+//! Basic Data Structures
+
+function mixedNumbers(arr) {
+  arr.unshift("I", 2, "three"); // adding the first lines
+  arr.push(7, 'VIII', 9); // adding to end of the array
+  return arr;
+}
+console.log(mixedNumbers(['IV', 5, 'six']));
+
+function popShift(arr) {
+  let popped = arr.pop(); // popped one is the last index of array
+  let shifted = arr.shift(); // and shifted one is the first one
+  return [shifted, popped];
+}
+console.log(popShift(['challenge', 'is', 'not', 'complete']));
+
+
+const arr = [2, 4, 5, 1, 7, 5, 2, 1];
+arr.splice(1,4); // .splice(start, deletecount) => it starts from the [1] index and deleting till the [4]th index
+console.log(arr);
+
+
+function htmlColorNames(arr) {
+  arr.splice(0,2,'DarkSalmon','BlanchedAlmond'); // this method is helping you to delete first 2 elements and replace it with the new ones
+  return arr;
+}
+console.log(htmlColorNames(['DarkGoldenRod', 'WhiteSmoke', 'LavenderBlush', 'PaleTurquoise', 'FireBrick']));
+
+function forecast(arr) {
+  let slicedArr = arr.slice(2,4);
+  return slicedArr; // or arr.slice(1,4) => giving 'warm','sunny'
+}
+console.log(forecast(['cold', 'rainy', 'warm', 'sunny', 'cool', 'thunderstorms']));
+
+function copyMachine(arr, num) {
+  let newArr = [];
+  while (num >= 1) {
+    newArr.push([...arr]); // pushing to new array times value of the num parameter
+    num--;
+  }
+  return newArr;
+}
+console.log(copyMachine([true, false, true], 2));
+
+
+function spreadOut() {
+  let fragment = ['to', 'code'];
+  let sentence = ['learning', ...fragment, 'is', 'fun']; 
+  return sentence;
+}
+console.log(spreadOut());
+
+function quickCheck(arr, elem) {
+  if (arr.indexOf(elem) >= 0){ // returning 1 for true
+    return true;
+  }
+    return false; // returning -1 for false
+}
+console.log(quickCheck(['squash', 'onions', 'shallots'], 'mushrooms'));
+
+
+//! Algorithm Scripts
+//! Object Oriented Programming
+//! Functional Programming
+//! Intermediate Algorithm Scriptings
