@@ -1,3 +1,90 @@
 //! Algorithm Scripts
 
 // Converting celcius to fahrenheit
+function convertCtoF(celsius) {
+    let fahrenheit = celsius * 9/5 + 32;
+    return fahrenheit;
+  }
+  convertCtoF(30);
+
+// reversing the word
+  function reverseString(str) {
+    return str.split("").reverse().join("");
+  }
+  reverseString('hello');
+
+  // Factorializing a number
+  function factorialize(num) {
+    if ( num <= 0 ){
+      return 1;
+    } 
+    return num * factorialize(num - 1);
+   }
+   
+   factorialize(5);
+
+
+   // Find the longest word in a string
+   function findLongestWordLength(str) {
+  
+    let words = str.split(" ");
+    let maxLength = 0; 
+    
+    for( let i = 0 ; i < words.length ; i++ ){
+      if ( words[i].length > maxLength){
+        maxLength = words[i].length;
+      }
+    }
+    return maxLength;
+  }
+  findLongestWordLength('The quick brown fox jumped over the lazy dog');
+
+
+  // Return largest numbers in array
+  function largestOfFour(arr) {
+
+    let numbers = [];
+    
+    for ( let i = 0 ; i < arr.length ; i++ ){
+    let maxNumber = arr[i][0];
+    
+      for ( let j = 0 ; j < arr[i].length ; j++ ){
+        if ( arr[i][j] > maxNumber ){
+          maxNumber = arr[i][j];
+        }
+      }
+        numbers.push(maxNumber);
+    }
+      return numbers;
+    }
+    
+    largestOfFour([
+      [4, 5, 1, 3],
+      [13, 27, 18, 26],
+      [32, 35, 37, 39],
+      [1000, 1001, 857, 1]
+    ]);
+
+// confirming the last word without .endswith()
+function confirmEnding(str, target) {
+    let endPortion = str.slice(str.length - target.length);
+    return endPortion === target;
+  }
+  confirmEnding('Bastian', 'n');
+
+  // repeating string 
+  function repeatStringNumTimes(str, num) {
+    if ( num <= 0 ){
+      return "";
+    }
+    
+    let result = "";
+  
+    for ( let i = 1 ; i <= num ; i++ ){
+      result += str;
+    }
+    return result;
+  }
+  repeatStringNumTimes('abc', 3);
+
+  
