@@ -87,4 +87,67 @@ function confirmEnding(str, target) {
   }
   repeatStringNumTimes('abc', 3);
 
+// Truncating the string
+function truncateString(str, num) {
   
+    if (str.length <= num) {
+      return str; // if the length is already smaller than num 
+    }
+  
+    let words = str.split('');
+    let res = '';
+    
+      for ( let i = 0 ; i < num ; i++) {
+        res += words[i]; 
+      }
+    return `${res}...`;
+  }
+  console.log(truncateString('A-tisket a-tasket A green and yellow basket', 8));
+
+// find keepers
+function findElement(arr, func) {
+
+for ( let i = 0 ; i < arr.length ; i++ ){
+    if ( func(arr[i])){
+    return arr[i];
+    } 
+}
+return;
+}
+findElement([1, 2, 3, 4], num => num % 2 === 0);
+
+// boolean finder
+function booWho(bool) {
+    if ( typeof bool === 'boolean' ){
+      return true;
+    }
+      return false;
+  }
+booWho(null);
+
+
+// Title case a sentence 
+function titleCase(str) {
+    let words = str.split(' ');
+    let res = '';
+    for( let i = 0 ; i < words.length ; i++ ){
+      let word = words[i];
+      if ( word.length > 0 ){
+        res += word[0].toUpperCase() + word.slice(1).toLowerCase() + ' ';
+        }
+      }
+    return res.trim();
+  }
+  titleCase("I'm a little tea pot");
+
+/* second way to solve 
+
+  function titleCase(str) {
+  return str
+    .toLowerCase()
+    .split(" ")
+    .map(val => val.replace(val.charAt(0), val.charAt(0).toUpperCase()))
+    .join(" ");
+}
+titleCase("I'm a little tea pot");
+  */
