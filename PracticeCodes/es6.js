@@ -362,8 +362,144 @@ return userObj.data.friends;
 }
 console.log(addFriend(user, 'Pete'));
 
-
-
 //! Object Oriented Programming
+function Dog(name, color) {
+  this.name = name;
+  this.color = color;
+  this.numLegs = 4;
+}
+let terrier = new Dog(); // creating a new object from the Dog constructor function
+
+
+function House(numBedrooms) {
+  this.numBedrooms = numBedrooms;
+}
+let myHouse = new House(4);
+myHouse instanceof House; // using istanceof to check if the object is an instance of the constructor function
+
+
+function Bird(name) {
+  this.name = name;
+  this.numLegs = 2;
+}
+
+let canary = new Bird("Tweety");
+let ownProps = [];
+for ( let property in canary){
+  if (canary.hasOwnProperty(property)){
+    ownProps.push(property);
+  }
+}
+console.log(ownProps); // this is the way to check the own properties of the object
+
+
+
+function Dog(name) {
+  this.name = name;
+}
+Dog.prototype.numLegs = 4;// adding the numLegs property to the Dog constructor function
+let beagle = new Dog("Snoopy");
+// let ownProps = [];
+let prototypeProps = [];
+for ( let property in beagle){
+  if (Dog.hasOwnProperty(property)){
+    ownProps.push(property);
+  }else{
+    prototypeProps.push(property);
+  }
+}
+
+
+Dog.prototype = {
+  constructor: Dog, // this is the way to add the constructor property to the Dog prototype
+  numLegs: 4,
+  eat: function() {
+    console.log("nom nom nom");
+  },
+  describe: function() {
+    console.log("My name is " + this.name);
+  }
+};
+
+
+Dog.prototype.isPrototypeOf(beagle); // checking if the Dog prototype is the prototype of the beagle object
+
+
+function Cat(name) {
+  this.name = name;
+}
+Cat.prototype = {
+  constructor: Cat,
+  
+};
+function Bear(name) {
+  this.name = name;
+}
+Bear.prototype = {
+  constructor: Bear,
+  
+};
+function Animal() { }
+Animal.prototype = {
+  constructor: Animal,
+  eat: function() {
+    console.log("nom nom nom");
+  }
+}; 
+
+let duck = Object.create(Animal.prototype); // creating a new object from the Animal prototype
+let beagles = Object.create(Animal.prototype);
+
+Dog.prototype = Object.create(Animal.prototype); // dog is inheriting the Animal prototype
+
+
+Dog.prototype.constructor = Dog; // setting the constructor property of the Dog prototype to Dog
+Bird.prototype.constructor = Bird;
+
+function Animal() { }
+Animal.prototype.eat = function() { console.log("nom nom nom"); };
+
+function Dog() { }
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.bark = function() {
+  console.log("Woof!");
+}
+Dog.prototype.constructor = Dog;
+
+
+(function () {
+  console.log("A cozy nest is ready");
+})(); // this is the way to create an IIFE (Immediately Invoked Function Expression) 
+// which is a function that runs as soon as it is defined
+makeNest();
+
+
+let isCuteMixin = function(obj) {
+  obj.isCute = function() {
+    return true;
+  };
+};
+let singMixin = function(obj) {
+  obj.sing = function() {
+    console.log("Singing to an awesome tune");
+  };
+};
+
+let funModule = (function() {
+  return{ // creating a module pattern
+    isCuteMixin:  function(obj) {
+  obj.isCute = function() {
+    return true;
+  }; 
+},
+    singMixin: function(obj) {
+      obj.sing = function() {
+      console.log("Singing to an awesome tune");
+  };
+}
+  };
+})();
+
+
 //! Functional Programming
 //! Intermediate Algorithm Scriptings
