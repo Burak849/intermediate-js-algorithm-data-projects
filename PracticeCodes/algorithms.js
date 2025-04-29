@@ -151,3 +151,24 @@ function titleCase(str) {
 }
 titleCase("I'm a little tea pot");
   */
+
+
+// slice and splice methods
+function frankenSplice(arr1, arr2, n) {
+  let array = arr2.slice(); 
+  for ( let i = 0 ; i < arr1.length ; i++ ){
+    array.splice( n, 0, arr1[i] );
+    n++;
+  }
+  return array;
+}
+frankenSplice([1, 2, 3], [4, 5, 6], 1);
+
+//bolean and truthy values
+function bouncer(arr) {
+  return arr.filter( (item) => item ); // filter out falsy values
+  // return arr.filter(Boolean); // another way to filter out falsy values
+  }
+  bouncer([7, 'ate', '', false, 9]);
+
+  

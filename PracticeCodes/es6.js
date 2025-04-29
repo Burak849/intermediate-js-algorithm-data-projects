@@ -364,7 +364,6 @@ console.log(addFriend(user, 'Pete'));
 
 
 
-
 //! Object Oriented Programming
 //! Functional Programming
 //! Intermediate Algorithm Scriptings
