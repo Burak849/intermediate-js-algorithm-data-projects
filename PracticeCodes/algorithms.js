@@ -171,4 +171,28 @@ function bouncer(arr) {
   }
   bouncer([7, 'ate', '', false, 9]);
 
+// where do I belong
+  function getIndexToIns(arr, num) {
+    arr.sort( (a, b) => a - b ); // sorting the array for ascending
+    for ( let i = 0 ; i < arr.length ; i++ ){
+        if ( arr[i] >= num ){
+          return i;
+      }
+  }
+    return arr.length;
+  }
+  getIndexToIns([40, 60], 50);
   
+
+function mutation(arr) {
+
+  const firstWord = arr[0].toLowerCase();
+  const secondWord = arr[1].toLowerCase();
+  
+  for ( let i = 0 ; i < secondWord.length; i++) {
+      if (firstWord.indexOf(secondWord[i]) < 0) return false;
+    }
+    return true;
+  }
+  mutation(['hello', 'hey']);
+
