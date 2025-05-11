@@ -683,4 +683,42 @@ const ratings = watchList.map( arg => ({
 
 console.log(JSON.stringify(ratings));
 
+// own prototype method for map
+Array.prototype.myMap = function(callback) {
+  const newArray = [];
+  for (let i = 0; i < this.length; i++) {
+    newArray.push(callback(this[i], i, this));
+  }
+  return newArray;
+};
+
+
+// filtering and map
+const filteredList = watchList.filter(el => {
+  return parseFloat(el.imdbRating) >= 8.0;
+}).map(el => {
+      return {title: el.Title, rating: el.imdbRating}
+      });
+
+
+// implementing the filter method
+Array.prototype.myFilter = function(callback) {
+  const newArray = [];
+  for (let i = 0; i < this.length; i++) {
+    if (Boolean(callback(this[i], i, this)) === true) {
+      newArray.push(this[i]);
+    }
+  }
+  return newArray;
+};
+
+
+
+
+
+
+
+
+
+
 //! Intermediate Algorithm Scriptings
