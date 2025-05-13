@@ -722,3 +722,144 @@ Array.prototype.myFilter = function(callback) {
 
 
 //! Intermediate Algorithm Scriptings
+
+// sum of the arrays
+function sumAll(arr) { 
+  const num1 = arr[0];
+  const num2 = arr[1];
+  let res = 0;
+
+if ( num1 < num2 ){ 
+  for ( let i = num1 ; i <= num2 ; i++ ){
+    res = res + i;
+  }
+} else {
+    for ( let i = num2 ; i <= num1 ; i++ ){
+    res = res + i;
+  }
+}
+    return res;
+}
+sumAll([1, 4]);
+
+// filtering the same values from the arrays
+
+function diffArray(arr1, arr2) {
+  const result = [];
+
+  for (let i = 0; i < arr1.length; i++) {
+    if (!arr2.includes(arr1[i])) {
+      result.push(arr1[i]);
+    }
+  }
+
+  for (let i = 0; i < arr2.length; i++) {
+    if (!arr1.includes(arr2[i])) {
+      result.push(arr2[i]);
+    }
+  }
+  
+  return result;
+}
+
+// for alternative version
+function diffArray(arr1, arr2) {
+  return arr1
+    .filter(item => !arr2.includes(item))
+    .concat(arr2.filter(item => !arr1.includes(item)));
+}
+diffArray([1, 2, 3, 5], [1, 2, 3, 4, 5]);
+
+// removing the elements from the array
+function sliceArray(anim, beginSlice, endSlice) {
+  let newArr = [];
+  newArr = anim.slice(beginSlice, endSlice);
+  return newArr;
+}
+const inputAnim = ["Cat", "Dog", "Tiger", "Zebra", "Ant"];
+sliceArray(inputAnim, 1, 3);
+
+// usin concat method to add the elements to the array
+function nonMutatingConcat(original, attach) {
+  return original.concat(attach);
+}
+const first = [1, 2, 3];
+const second = [4, 5];
+nonMutatingConcat(first, second);
+
+// using the spread operator
+function getRating(watchList) {
+  const dataSpecial = watchList.reduce((data,{Director: name, imdbRating: rates}) => {
+    if( name === 'Christopher Nolan'){
+      data.count++;
+      data.sum += Number(rates);
+    }
+    return data;
+  }, {sum: 0 , count: 0});
+const averageRating = dataSpecial.sum / dataSpecial.count; 
+return averageRating;
+}
+console.log(getRating(watchList));
+
+// squaring the numbers with filter and map
+const squareList = arr => {
+  return arr
+    .filter(num => Number.isInteger(num) && num > 0)
+    .map(num => num * num);
+};
+const squaredIntegers = squareList([-3, 4.8, 5, 3, -3.2]);
+console.log(squaredIntegers);
+
+// sorting the alphabetical order
+function alphabeticalOrder(arr) {
+  return arr.sort(function (a,b){
+    return a === b ? 1 : a < b ? -1 : 0; // if a equals b put it to next index, 
+    // if it is not check if a is less than b put it to the first index if its not let it stay there
+  })
+}
+alphabeticalOrder(["a", "d", "c", "a", "z", "g"]);
+
+
+// sorting the numbers without mutating the original array
+const globalArray = [5, 6, 3, 2, 9];
+function nonMutatingSort(arr) {
+  return [].concat(arr).sort( function ( a, b ) {
+    return a - b;
+  });
+}
+nonMutatingSort(globalArray);
+
+// using the regex to split the string
+function splitify(str) {
+  return str.split(/\W/); // the ones which are not words
+}
+splitify("Hello World,I-am code");
+
+// another way to split the string and join it
+function sentensify(str) {
+  return str.split(/\W/).join(" ");
+}
+sentensify("May-the-force-be-with-you");
+
+function urlSlug(title) {
+  return title.trim().toLowerCase().split(/\W+/).join("-"); // removing the spaces and making it lowercase and
+  // lastly splitting the non word characters
+  // and joining them with -
+}
+urlSlug("A Mind Needs Books Like A Sword Needs A Whetstone");
+
+// using the every method to check the values if all are positive
+function checkPositive(arr) {
+  return arr.every( function (currVal) { // some method is the same but checking if at least one of them is positive
+    return currVal > 0 ? true : false; 
+  })
+}
+checkPositive([1, 2, 3, -4, 5]);
+
+
+// curried function to add the numbers
+function add(x) {
+return function(y) { return function(z) {return x + y + z} };
+}
+
+add(10)(20)(30);
