@@ -205,3 +205,75 @@ function mutation(arr) {
     return newArr;
   }
   chunkArrayInGroups(['a', 'b', 'c', 'd'], 2);
+
+// slasher
+function destroyer(arr, ...valsToRemove) {
+  return arr.filter(item => !valsToRemove.includes(item));
+}
+destroyer([1, 2, 3, 1, 2, 3], 2, 3);
+
+// where do the sources go
+// This function filters the collection based on the source object
+function whatIsInAName(collection, source) {
+  const keys = Object.keys(source);
+
+  return collection.filter( obj => {
+    return keys.every(key => obj.hasOwnProperty(key) && obj[key] === source[key]);
+  });
+}
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
+
+// Spinal Tap Case
+function spinalCase(str) {
+  str = str.replace(/([a-z])([A-Z])/g, "$1 $2"); // regex to add space between lowercase and uppercase letters
+  return str.trim().toLowerCase().split(/(?:_| )+/).join("-"); // regex to split by spaces and underscores
+}
+spinalCase('This Is Spinal Tap');
+
+// Pig Latin
+function translatePigLatin(str) {
+const consonants =  /^[aeiou]/i;
+
+if (consonants.test(str)) {
+    return str + "way";
+  }
+
+  const consonantsCluster = str.match(/^[^aeiou]+/i)[0];
+  return str.slice(consonantsCluster.length) + consonantsCluster + "ay";
+}
+
+translatePigLatin("consonant");
+
+// Search and Replace
+function myReplace(str, before, after) {
+  const isCapitalized = before.charAt(0) === before.charAt(0).toUpperCase();
+  const newAfter = isCapitalized 
+                    ? after.charAt(0).toUpperCase() + after.slice(1) 
+                    : after.charAt(0).toLowerCase() + after.slice(1)
+  return str.replace(before, newAfter);
+}
+myReplace("A quick brown fox jumped over the lazy dog", "jumped", "leaped");
+
+// DNA Pairing
+function pairElement(str) {
+  const pairs = {
+    A: "T",
+    T: "A",
+    C: "G",
+    G: "C"
+  }; // defining the pairs of DNA
+  return str.split("").map(letter => [letter, pairs[letter]]); // it will map the pairs and return as array
+}
+pairElement("GCG");
+
+// Missing letters
+function fearNotLetter(str) {
+  for ( let i = 0 ; i < str.length ; i++ ){
+    const char = str.charCodeAt(i); // charCode means the unicode value of the character
+    if ( char !== str.charCodeAt(0) + i ){ // if the unicode value is not equal to the first character unicode value + i
+      return String.fromCharCode( char - 1 ); // it will return the unicode value of the character - 1
+    }
+}
+  return;
+}
+fearNotLetter("abce");
