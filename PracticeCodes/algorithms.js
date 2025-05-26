@@ -277,3 +277,72 @@ function fearNotLetter(str) {
   return;
 }
 fearNotLetter("abce");
+
+
+// sorted union of arrays 
+function uniteUnique(...arrays) {
+  const unique = []; // this will hold the unique values
+
+  for (let arr of arrays) {
+    for (let value of arr) { 
+      if (!unique.includes(value)) {
+        unique.push(value); // if the value is not already in the unique array, it will be added
+      }
+    }
+  }
+  return unique;
+}
+uniteUnique([1, 2, 3], [5, 2, 1, 4], [2, 1]); 
+
+// Convert HTML Entities
+function convertHTML(str) {
+  const htmlEntities = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&apos;"
+  }; // defining the HTML entities
+  return str
+    .split("")
+    .map(entity => htmlEntities[entity] || entity)
+    .join(""); // it will map the entities and return as string
+}
+convertHTML("Dolce & Gabbana");
+
+// Sum Fibonacci Numbers 
+function sumFibs(num) {
+  let firtFib = 0;
+  let secFib = 1;
+  let thirdFib = 1;
+  let sum = 0;
+
+  while (secFib <= num) {
+    sum += secFib; // adding the second Fibonacci number to the sum if it is less than or equal to num
+    if (thirdFib <= num) sum += thirdFib; // adding the third Fibonacci number to the sum if it is less than or equal to num
+    [firtFib, secFib] = [secFib + thirdFib, thirdFib + (secFib + thirdFib)]; // updating the Fibonacci numbers
+    thirdFib = firtFib + secFib; // calculating the next Fibonacci number
+  }
+  return sum;
+}
+
+// isPrime function to check if a number is prime we will use this function in sumPrimes
+function isPrime(n) {
+  if (n < 2) return false; // numbers less than 2 are not prime
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+    if (n % i === 0) return false; // if n is divisible by any number other than 1 and itself, it is not prime
+  }
+  return true; // if no divisors found, it is prime
+}
+// Sum All Primes
+function sumPrimes(num) {
+  let sum = 0;
+
+  for (let i = 2; i <= num; i++) {
+    if (isPrime(i)) {
+      sum += i; // adding the prime number to the sum
+    }
+  }
+  return sum;
+}
+
