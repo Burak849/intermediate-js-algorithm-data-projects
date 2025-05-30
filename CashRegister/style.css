@@ -1,0 +1,32 @@
+:root{
+    --color-primary: #eb2f64; 
+    --color-primary-light: #cd5074;
+    --color-primary-dark: #fe1a5a;
+
+    --color-secondary: #339fc7;
+    --color-secondary-light: #6bc2e1;
+    --color-secondary-dark: #0291c5;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+html{
+    box-sizing: border-box;
+    font-size: 62.5%; /* 1rem = 10px */
+} 
+body {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    background-image: linear-gradient(to right, var(--color-primary), var(--color-secondary-light));
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+  }
