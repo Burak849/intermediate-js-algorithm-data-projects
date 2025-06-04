@@ -357,3 +357,114 @@ function smallestCommons(arr) {
 }
 smallestCommons([1,5]);
 
+// Drop it
+function dropElements(arr, func) {
+   while (arr.length > 0 && !func(arr[0])) {
+    arr.shift(); // remove the first element until the condition is met
+  }
+  return arr;
+}
+dropElements([1, 2, 3], function(n) {return n < 3; });
+
+// Steamroller
+function steamrollArray(arr) {
+  return arr.reduce((flat, toFlatten) => {
+    return flat.concat(Array.isArray(toFlatten) ? steamrollArray(toFlatten) : toFlatten); // recursively flatten the array
+  }, []);
+}
+
+// binary agents
+function binaryAgent(str) {
+  return str.split(" ").map( arg => String.fromCharCode(parseInt(arg,2)) ).join(""); // for binary code
+}
+binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111");
+
+
+// Everything Be True
+function truthCheck(collection, pre) {
+  return collection.every(obj => obj[pre]); // checks if every object in the collection has the property pre and it is truthy
+}
+truthCheck([{name: "Quincy", role: "Founder", isBot: false}, {name: "Naomi", role: "", isBot: false}, {name: "Camperbot", role: "Bot", isBot: true}], "isBot");
+
+
+// Arguments Optional
+function addTogether(...args) {
+
+  const [first, second] = args; // destructuring the arguments to get first and second
+
+  if (typeof first !== "number") {
+    return undefined;
+  }
+
+  if (args.length === 1) { // if only one argument is passed
+    return function (second) { // it will return a function that takes the second argument
+      if (typeof second !== "number") {
+        return undefined;
+      }
+      return first + second;
+    };
+  }
+
+  if (typeof second !== "number") {
+    return undefined;
+  }
+
+  return first + second;
+}
+addTogether(2,3);
+
+// Make a Person
+const Person = function(first, last) {
+  let firstName = first;
+  let lastName  = last;
+  this.getFirstName = function() {
+    return firstName;
+  };
+
+  this.getLastName = function() {
+    return lastName;
+  };
+
+  this.getFullName = function() {
+    return this.getFirstName() + " " + this.getLastName();
+  };
+
+  this.setFirstName = function(first) {
+    return firstName = first;
+  };
+
+  this.setLastName = function(last) {
+    return lastName = last;
+  };
+
+  this.setFullName = function(first, last) {
+    this.setFirstName(first);
+    this.setLastName(last);
+    return this.getFullName();
+  };
+};
+const bob = new Person("Bob", "Ross");
+console.log(bob.getFullName());
+
+// Map the Debris
+function orbitalPeriod(arr) {
+  const GM = 398600.4418;
+  const earthRadius = 6367.4447;
+  const a = 2 * Math.PI; // constant for 2 * pi
+  const newArrs = [];
+
+  const getOrb = function(obj){ // function to calculate the orbital period
+  const c = Math.pow(earthRadius + obj.avgAlt, 3); // calculating the cube of the sum of earth radius and average altitude
+  const b = Math.sqrt(c / GM); // calculating the square root of the division of c by GM
+    const orbPeriod = Math.round(a * b);
+    return {name: obj.name, orbitalPeriod: orbPeriod};
+  };
+
+  for (let elem in arr) {
+    newArrs.push(getOrb(arr[elem])); // pushing the result of getOrb function into newArrs
+  }
+
+  return newArrs;
+}
+
+orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);

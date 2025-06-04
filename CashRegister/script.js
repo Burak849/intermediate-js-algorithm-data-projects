@@ -1,4 +1,3 @@
-// Cash Register
 function checkCashRegister(price, cash, cid) {
   const currencyUnit = [
     ["PENNY", 0.01],
@@ -10,26 +9,51 @@ function checkCashRegister(price, cash, cid) {
     ["TEN", 10],
     ["TWENTY", 20],
     ["ONE HUNDRED", 100]
-  ]; // defining the currency units and their values
-  let change = cash - price; 
-  let changeArr = [];
-  let totalCid = cid.reduce((acc, curr) => acc + curr[1], 0).toFixed(2); // calculating the total cash in drawer
+  ]; // Define the currency units with their values
 
-  if (change > totalCid) return "Insufficient Funds"; // if change is greater than total cash in drawer
-  if (change === parseFloat(totalCid)) return "Closed"; // if change is equal to total cash in drawer
+  let changeDue = cash - price;
+  let totalCid = parseFloat(cid.reduce((acc, curr) => acc + curr[1], 0).toFixed(2));
+  let result = { status: null, change: [] }; // Initializing the result object
 
-  for (let i = currencyUnit.length - 1; i >= 0; i--) {
-    let coinName = currencyUnit[i][0];
-    let coinValue = currencyUnit[i][1];
-    let coinAmount = cid[i][1];
+  if (changeDue > totalCid) {
+    result.status = "INSUFFICIENT_FUNDS";
+    return result;
+  }
 
-    while (change >= coinValue && coinAmount > 0) {
-      change -= coinValue;
-      change = change.toFixed(2);
-      coinAmount -= coinValue;
-      changeArr.push([coinName, coinValue]);
+  if (changeDue === totalCid) {
+    result.status = "CLOSED";
+    result.change = cid;
+    return result;
+  }
+
+  const changeArr = [];
+  const reversedCid = cid.reverse();
+
+  for (let i = 0; i < currencyUnit.length; i++) { // Iterate through each currency unit
+    let coinName = reversedCid[i][0];
+    let coinValue = currencyUnit.find(c => c[0] === coinName)[1];
+    let coinTotal = reversedCid[i][1];
+    let coinToReturn = 0;
+
+    while (changeDue >= coinValue && coinTotal > 0) { // While we still need change and have coins available
+      changeDue -= coinValue;
+      changeDue = parseFloat(changeDue.toFixed(2));
+      coinTotal -= coinValue;
+      coinToReturn += coinValue;
+    }
+
+    if (coinToReturn > 0) {
+      changeArr.push([coinName, parseFloat(coinToReturn.toFixed(2))]);
     }
   }
-  
-  return changeArr.length > 0 ? changeArr : "Insufficient Funds";
+
+  if (changeDue > 0) { // If we still have change left to give
+    result.status = "INSUFFICIENT_FUNDS";
+    result.change = [];
+    return result;
+  }
+
+  result.status = "OPEN"; // If we successfully calculated the change
+  result.change = changeArr;
+  return result;
 }
